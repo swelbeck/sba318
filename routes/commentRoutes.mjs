@@ -18,4 +18,28 @@ router.get("/", (req, res) => {
   res.json({ comments, links });
 });
 
+// @route:  GET api/comments/:id
+// @desc    Gets one comment
+// @access: Public
+router.get("/:id", (req, res, next) => {
+  let comment = comments.find((c) => c.id == req.params.id);
+
+  const links = [
+    {
+      href: `/${req.params.id}`,
+      rel: "",
+      type: "PATCH",
+    },
+    {
+      href: `/${req.params.id}`,
+      rel: "",
+      type: "DELETE",
+    },
+  ];
+
+  if (comment) res.json({ comments, links });
+  else next();
+});
+
+
 export default router;

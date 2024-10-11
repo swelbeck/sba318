@@ -18,4 +18,28 @@ router.get("/", (req, res) => {
   res.json({ posts, links });
 });
 
+// @route:  GET api/posts/:id
+// @desc    Gets one post
+// @access: Public
+router.get("/:id", (req, res, next) => {
+  let post = posts.find((p) => p.id == req.params.id);
+
+  const links = [
+    {
+      href: `/${req.params.id}`,
+      rel: "",
+      type: "PATCH",
+    },
+    {
+      href: `/${req.params.id}`,
+      rel: "",
+      type: "DELETE",
+    },
+  ];
+
+  if (post) res.json({ post, links });
+  else next();
+});
+
+
 export default router;

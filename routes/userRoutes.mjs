@@ -19,4 +19,27 @@ router.get("/", (req, res) => {
   res.json({ users, links });
 });
 
+// @route: GET api/users/:id
+// @description: Gets one user
+// @access: Public
+router.get("/:id", (req, res, next) => {
+  const user = users.find((u) => u.id == req.params.id);
+  const links = [
+    {
+      href: `/${req.params.id}`,
+      rel: "",
+      type: "PATCH",
+    },
+    {
+      href: `/${req.params.id}`,
+      rel: "",
+      type: "DELETE",
+    },
+  ];
+
+  if (user) res.json({ user, links });
+  else next();
+});
+
+
 export default router;
