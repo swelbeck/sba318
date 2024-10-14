@@ -88,4 +88,20 @@ router.patch("/:id", (req, res, next) => {
   else next();
 });
 
+// @route:  DELETE api/posts/:id
+// @desc    Delete one post
+// @access: Public
+router.delete("/:id", (req, res, next) => {
+  // The DELETE request route simply removes a resource.
+  const post = posts.find((p, i) => {
+    if (p.id == req.params.id) {
+      posts.splice(i, 1);
+      return true;
+    }
+  });
+
+  if (post) res.json(post);
+  else next();
+});
+
 export default router;

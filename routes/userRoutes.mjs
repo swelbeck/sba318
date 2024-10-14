@@ -87,4 +87,20 @@ router.patch("/:id", (req, res, next) => {
   else next();
 });
 
+// @route:  DELETE api/users/:id
+// @desc    Delete one user
+// @access: Public
+router.delete("/:id", (req, res, next) => {
+  // The DELETE request route simply removes a resource.
+  const user = users.find((u, i) => {
+    if (u.id == req.params.id) {
+      users.splice(i, 1);
+      return true;
+    }
+  });
+
+  if (user) res.json(user);
+  else next();
+});
+
 export default router;

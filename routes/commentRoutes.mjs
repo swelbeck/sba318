@@ -82,4 +82,20 @@ router.patch("/:id", (req, res, next) => {
   else next();
 });
 
+// @route:  DELETE api/comments/:id
+// @desc    Delete one comment
+// @access: Public
+router.delete("/:id", (req, res, next) => {
+  // The DELETE request route simply removes a resource.
+  const comment = comments.find((c, i) => {
+    if (c.id == req.params.id) {
+      comments.splice(i, 1);
+      return true;
+    }
+  });
+
+  if (comment) res.json(comment);
+  else next();
+});
+
 export default router;
