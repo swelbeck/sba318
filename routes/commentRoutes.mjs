@@ -26,12 +26,7 @@ router.post("/", (req, res, next) => {
   // If has all needed data, create new comment
   // Within the POST request route, we create a new
   // comment with the data given by the client.
-  if (
-    req.body.userId &&
-    req.body.postId &&
-    req.body.date &&
-    req.body.content
-  ) {
+  if (req.body.userId && req.body.postId && req.body.date && req.body.content) {
     const comment = {
       id: comments[comments.length - 1].id + 1,
       userId: req.body.userId,
@@ -44,7 +39,6 @@ router.post("/", (req, res, next) => {
     res.json(comments[comments.length - 1]);
   } else next(error(400, "Insuffient Data")); // Else send error
 });
-
 
 // @route:  GET api/comments/:id
 // @desc    Gets one comment
@@ -65,9 +59,27 @@ router.get("/:id", (req, res, next) => {
     },
   ];
 
-  if (comment) res.json({ comments, links });
+  if (comment) res.json({ comment, links });
   else next();
 });
 
+// @route:  PATCH api/posts/:id
+// @desc    Updates one post
+// @access: Public
+router.patch("/:id", (req, res, next) => {
+  // Within the PATCH request route, we allow the client
+  // to make changes to an existing post in the database.
+  const comment = comments.find((c, i) => {
+    if (c.id == req.params.id) {
+      for (const key in req.body) {
+        comments[i][key] = req.body[key];
+      }
+      return true;
+    }
+  });
+
+  if (comment) res.json(comment);
+  else next();
+});
 
 export default router;

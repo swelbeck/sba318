@@ -68,4 +68,23 @@ router.get("/:id", (req, res, next) => {
   else next();
 });
 
+// @route: PATCH api/users/:id
+// @description: Update specific user
+// @access: Public
+router.patch("/:id", (req, res, next) => {
+  // Within the PATCH request route, we allow the client
+  // to make changes to an existing user in the database.
+  const user = users.find((u, i) => {
+    if (u.id == req.params.id) {
+      for (const key in req.body) {
+        users[i][key] = req.body[key];
+      }
+      return true;
+    }
+  });
+
+  if (user) res.json(user);
+  else next();
+});
+
 export default router;
