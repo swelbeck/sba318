@@ -1,3 +1,4 @@
+// Imports
 import express from "express";
 import { comments } from "../data/comments.mjs";
 import error from "../utilities/error.mjs";
@@ -17,6 +18,33 @@ router.get("/", (req, res) => {
 
   res.json({ comments, links });
 });
+
+// @route:  POST api/posts
+// @description:    Creates one comment
+// @access: Public
+router.post("/", (req, res, next) => {
+  // If has all needed data, create new comment
+  // Within the POST request route, we create a new
+  // comment with the data given by the client.
+  if (
+    req.body.userId &&
+    req.body.postId &&
+    req.body.date &&
+    req.body.content
+  ) {
+    const comment = {
+      id: comments[comments.length - 1].id + 1,
+      userId: req.body.userId,
+      postId: req.body.postId,
+      date: req.body.date,
+      content: req.body.content,
+    };
+
+    comments.push(comment);
+    res.json(comments[comments.length - 1]);
+  } else next(error(400, "Insuffient Data")); // Else send error
+});
+
 
 // @route:  GET api/comments/:id
 // @desc    Gets one comment

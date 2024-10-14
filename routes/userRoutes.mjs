@@ -1,12 +1,12 @@
+// Imports
 import express from "express";
 import { users } from "../data/users.mjs";
 import error from "../utilities/error.mjs";
 let router = express.Router();
 
-
-// @route: GET api/users
-// @description: Gets all users
-// @access: Public
+// @route:  GET api/users
+// @description:    Gets all users
+// @access:    Public
 router.get("/", (req, res) => {
   const links = [
     {
@@ -18,6 +18,33 @@ router.get("/", (req, res) => {
 
   res.json({ users, links });
 });
+
+// @route: POST api/users
+// @description: Add new user to database
+// @access: Public
+router.post("/", (req, res, next) => {
+  // Within the POST request route, we create a new
+  // user with the data given by the client.
+  // We should also do some more robust validation here,
+  // but this is just an example for now.
+  if (req.body.name && req.body.username && req.body.email) {
+    // body has name, email and username, continue...
+    if (users.find((u) => u.username == req.body.username))
+      next(error(409, "Username already taken"));
+
+    // Create a new user with data
+    const user = {
+      id: users[users.length - 1].id + 1,
+      name: req.body.name,
+      username: req.body.username,
+      email: req.body.email,
+    };
+
+    users.push(user); // Push new user to database
+    res.json(users[users.length - 1]); // Respond with new user info
+  } else next(error(400, "Insufficient Data")); // use send error
+});
+
 
 // @route: GET api/users/:id
 // @description: Gets one user
@@ -40,6 +67,5 @@ router.get("/:id", (req, res, next) => {
   if (user) res.json({ user, links });
   else next();
 });
-
 
 export default router;
