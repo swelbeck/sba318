@@ -11,8 +11,13 @@ import error from "./utilities/error.mjs";
 const app = express();
 let PORT = 3000;
 
+// Static files
+app.use(express.static("styles"));
 
-// Middleware
+// View engines
+app.set("view engine", "pug");
+app.set("views", "./views");
+
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
@@ -23,7 +28,9 @@ app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
 
 // Error Handling
-
+app.use((req, res, next) => {
+  next(error(404, "Resource Not Found"));
+});
 
 // Listen
 app.listen(PORT, () => {

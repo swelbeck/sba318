@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title My Blog
+    link(rel='stylesheet', href='/styles.css')
+  body
+    h1 Blog Posts
+    each post in posts
+      div
+        h2= post.title
+        p= post.content
+        p= post.date
+        a(href=`/api/posts/${post.id}`) View
+
+form(action="/api/posts", method="POST")
+  label(for="title") Title:
+  input(type="text" name="title" required)
+  
+  label(for="content") Content:
+  textarea(name="content" required)
+
+  button(type="submit") Create Post

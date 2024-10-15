@@ -4,6 +4,10 @@ import { posts } from "../data/posts.mjs";
 import error from "../utilities/error.mjs";
 let router = express.Router();
 
+router.get("/", (req, res) => {
+  res.render("index", { posts }); 
+});
+
 // @route:  GET api/posts
 // @description:    Gets all posts
 // @access:     Public
