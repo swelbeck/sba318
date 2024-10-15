@@ -30,6 +30,12 @@ app.use((req, res, next) => {
 });
 
 // Routes
+app.get(`/`, (req, res) => {
+  res.send(`Home Route`);
+});
+app.get(`/api`, (req, res) => {
+  res.send(`API routes`);
+});
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);

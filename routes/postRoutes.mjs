@@ -2,7 +2,7 @@
 import express from "express";
 import { posts } from "../data/posts.mjs";
 import error from "../utilities/error.mjs";
-let router = express.Router();
+const router = express.Router();
 
 router.get("/", (req, res) => {
   res.render("index", { posts }); 
