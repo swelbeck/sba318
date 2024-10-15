@@ -13,9 +13,15 @@ html
         a(href=`/api/posts/${post.id}`) View
 
 form(action="/api/posts", method="POST")
+  label(for="userId") User ID:
+  input(type="number" name="userId" required)
+
+  label(for="date") Date:
+  input(type="date" name="date" required)
+
   label(for="title") Title:
   input(type="text" name="title" required)
-  
+
   label(for="content") Content:
   textarea(name="content" required)
 
