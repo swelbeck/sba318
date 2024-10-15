@@ -27,10 +27,10 @@ app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
 
-// Error Handling
-app.use((req, res, next) => {
-  next(error(404, "Resource Not Found"));
-});
+// // Error Handling
+// app.use((req, res, next) => {
+//   next(error(404, "Resource Not Found"));
+// });
 
 // Listen
 app.listen(PORT, () => {

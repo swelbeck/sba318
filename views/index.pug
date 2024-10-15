@@ -8,8 +8,8 @@ html
     each post in posts
       div
         h2= post.title
-        p= post.content
         p= post.date
+        p= post.content
         a(href=`/api/posts/${post.id}`) View
 
 form(action="/api/posts", method="POST")
