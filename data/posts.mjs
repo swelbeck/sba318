@@ -18,7 +18,7 @@ export const posts = [
   },
   {
     id: 3,
-    userId: 1,
+    userId: 2,
     date: "2024-10-11",
     title: "delectus ullam et corporis nulla voluptas sequi",
     content:
@@ -42,7 +42,7 @@ export const posts = [
   },
   {
     id: 6,
-    userId: 2,
+    userId: 3,
     date: "2024-10-11",
     title: "ullam ut quidem id aut vel consequuntur",
     content:
@@ -66,7 +66,7 @@ export const posts = [
   },
   {
     id: 9,
-    userId: 3,
+    userId: 4,
     date: "2024-10-11",
     title: "magnam ut rerum iure",
     content:

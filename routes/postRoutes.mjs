@@ -73,6 +73,24 @@ router.get("/:id", (req, res, next) => {
   else next();
 });
 
+// @route:  GET api/posts/:id
+// @desc    Gets posts by userId or date
+// @access: Public
+router.get("/", (req, res) => {
+  const { userId, date } = req.query;
+  let filteredPosts = posts;
+
+  if (userId) {
+    filteredPosts = filteredPosts.filter((post) => post.userId == userId);
+  }
+
+  if (date) {
+    filteredPosts = filteredPosts.filter((post) => post.date == date);
+  }
+
+  res.json(filteredPosts);
+});
+
 // @route:  PATCH api/posts/:id
 // @desc    Updates one post
 // @access: Public
