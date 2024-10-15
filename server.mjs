@@ -40,10 +40,20 @@ app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
 
-// // Error Handling
-// app.use((req, res, next) => {
-//   next(error(404, "Resource Not Found"));
-// });
+// Error Handling
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.json({
+    error: {
+      message: err.message || "Internal Server Error",
+    },
+  });
+});
+
+// 404 Error
+app.use((req, res, next) => {
+  next(error(404, "Resource Not Found"));
+});
 
 // Listen
 app.listen(PORT, () => {
