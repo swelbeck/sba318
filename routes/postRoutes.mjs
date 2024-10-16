@@ -5,7 +5,7 @@ import error from "../utilities/error.mjs";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("index", { posts }); 
+  res.render("index", { posts });
 });
 
 // @route:  GET api/posts
@@ -30,12 +30,7 @@ router.post("/", (req, res, next) => {
   //If has all needed data, create new post
   // Within the POST request route, we create a new
   // post with the data given by the client.
-  if (
-    req.body.userId &&
-    req.body.date &&
-    req.body.title &&
-    req.body.content
-  ) {
+  if (req.body.userId && req.body.date && req.body.title && req.body.content) {
     const post = {
       id: posts[posts.length - 1].id + 1,
       userId: req.body.userId,
@@ -48,7 +43,6 @@ router.post("/", (req, res, next) => {
     res.json(posts[posts.length - 1]);
   } else next(error(400, "Insuffient Data")); // Else send error
 });
-
 
 // @route:  GET api/posts/:id
 // @desc    Gets one post
