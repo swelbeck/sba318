@@ -11,17 +11,17 @@ router.get("/", (req, res) => {
 // @route:  GET api/posts
 // @description:    Gets all posts
 // @access:     Public
-router.get("/", (req, res) => {
-  const links = [
-    {
-      href: "posts/:id",
-      rel: ":id",
-      type: "GET",
-    },
-  ];
+// router.get("/", (req, res) => {
+//   const links = [
+//     {
+//       href: "posts/:id",
+//       rel: ":id",
+//       type: "GET",
+//     },
+//   ];
 
-  res.json({ posts, links });
-});
+//   res.json({ posts, links });
+// });
 
 // @route:  POST api/posts
 // @desc    Creates one post
